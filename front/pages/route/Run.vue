@@ -30,7 +30,7 @@
         </v-progress-circular>
       </v-col>
       <v-col cols="12" style="position: relative">
-        <v-btn fab class="button-map">
+        <v-btn fab class="button-map" nuxt to="Map">
           <v-icon>mdi-map-marker</v-icon>
         </v-btn>
       </v-col>
@@ -91,9 +91,12 @@ export default {
 
       let pastLatLng
       if (this.$store.getters.getTotalLength === 0) {
+        console.log('現在地')
         // 初めに取得する値は0にするためその場の位置を代入
         pastLatLng = { lat: this.myLatLng1.lat, lng: this.myLatLng1.log }
       } else {
+        console.log('だめです' + this.$store.getters.getTotalLength)
+
         // 一つ前の緯度経度を代入
         pastLatLng = this.$store.getters.getPastLatLng
       }

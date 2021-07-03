@@ -4,7 +4,7 @@
       <v-col cols="12" md="7">
         <v-card max-width="2000px" class="ma-12 rounded-card">
           <v-row justify="center">
-            <v-card-title>{{ length }}m走る</v-card-title>
+            <v-card-title>{{ target }}m走る</v-card-title>
           </v-row>
         </v-card>
       </v-col>
@@ -19,12 +19,12 @@
         >
           <v-row>
             <v-col cols="12">
-              <div class="distance">{{ value }}</div>
-              <v-btn @click="getLocation()">距離を測る</v-btn>
+              <div class="distance">{{ value }}%</div>
+              <!-- <v-btn @click="getLocation()">距離を測る</v-btn> -->
             </v-col>
-            <v-col cols="12">
-              <v-btn @click="resetDistance()">リセットする</v-btn>
-              {{ testTotal }}km
+            <v-col cols="12" class="distance">
+              <!-- <v-btn @click="resetDistance()">リセットする</v-btn> -->
+              {{ testTotal }}m
             </v-col>
           </v-row>
         </v-progress-circular>
@@ -47,35 +47,49 @@ export default {
       latitude: 35,
       longitude: 138,
       myLatLng1: { lat: 35.397, lng: 138.644 },
-      length: 0,
-      testTotal: this.$store.getters.getTotalLength,
+      target: this.$store.getters.getTarget,
+      testTotal: 0,
     }
   },
   computed: {
     len() {
+      console.log('computed')
       return this.$store.getters.getTotalLength
     },
+
+    // targetLen() {
+    //   return this.$store.getters.getTarget
+    // },
   },
   watch: {
     len() {
-      console.log('変更されました')
+      console.log('watch')
       this.testTotal = this.$store.getters.getTotalLength
+      this.value = parseInt((this.testTotal / this.target) * 100000)
+
+      this.testTotal = parseInt(this.testTotal * 1000)
+    },
+    targetlen() {
+      this.target = this.$store.getters.getTarget
     },
   },
   beforeDestroy() {
     clearInterval(this.interval)
   },
-
   mounted() {
+    if (this.target === 0) {
+      this.randamTarget()
+    }
     this.interval = setInterval(() => {
       if (this.value === 100) {
+        
         return (this.value = 0)
       }
       this.value += 1
-    }, 20000)
+    }, 30000)
     this.interval = setInterval(() => {
       this.getLocation()
-    }, 20000)
+    }, 10000)
   },
   methods: {
     getLocation() {
@@ -83,23 +97,22 @@ export default {
     },
     success(position) {
       // 現在の緯度経度を代入
+      // console.log(this.$store.getters.getPastLatLng)
 
       this.myLatLng1.lat = position.coords.latitude
       this.myLatLng1.lng = position.coords.longitude
 
       position = { lat: this.myLatLng1.lat, lng: this.myLatLng1.lng }
 
-      let pastLatLng
-      if (this.$store.getters.getTotalLength === 0) {
-        console.log('現在地')
-        // 初めに取得する値は0にするためその場の位置を代入
-        pastLatLng = { lat: this.myLatLng1.lat, lng: this.myLatLng1.log }
-      } else {
-        console.log('だめです' + this.$store.getters.getTotalLength)
-
-        // 一つ前の緯度経度を代入
-        pastLatLng = this.$store.getters.getPastLatLng
-      }
+      const pastLatLng = this.$store.getters.getPastLatLng
+      console.log(pastLatLng)
+      // if (this.$store.getters.getTotalLength === 0) {
+      //   // 初めに取得する値は0にするためその場の位置を代入
+      //   pastLatLng = { lat: this.myLatLng1.lat, lng: this.myLatLng1.log }
+      // } else {
+      //   // 一つ前の緯度経度を代入
+      //   pastLatLng = this.$store.getters.getPastLatLng
+      // }
 
       // 距離
       const totalLength =
@@ -137,7 +150,12 @@ export default {
     },
     resetDistance() {
       localStorage.clear()
+      this.$store.commit('clear')
       this.testTotal = 0
+    },
+    randamTarget() {
+      const le = (Math.floor(Math.random() * (10 + 1 - 1)) + 1) * 100
+      this.$store.commit('setTarget', le)
     },
   },
 }

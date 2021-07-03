@@ -19,12 +19,12 @@
         >
           <v-row>
             <v-col cols="12">
-              <div class="distance">{{ value }}</div>
-              <v-btn @click="getLocation()">距離を測る</v-btn>
+              <div class="distance">{{ value }}%</div>
+              <!-- <v-btn @click="getLocation()">距離を測る</v-btn> -->
             </v-col>
-            <v-col cols="12">
-              <v-btn @click="resetDistance()">リセットする</v-btn>
-              {{ testTotal }}km
+            <v-col cols="12" class="distance">
+              <!-- <v-btn @click="resetDistance()">リセットする</v-btn> -->
+              {{ testTotal }}m
             </v-col>
           </v-row>
         </v-progress-circular>
@@ -48,21 +48,26 @@ export default {
       longitude: 138,
       myLatLng1: { lat: 35.397, lng: 138.644 },
       target: this.$store.getters.getTarget,
-      testTotal: this.$store.getters.getTotalLength,
+      testTotal: 0,
     }
   },
   computed: {
     len() {
+      console.log('computed')
       return this.$store.getters.getTotalLength
     },
-    targetLen() {
-      return this.$store.getters.getTarget
-    },
+
+    // targetLen() {
+    //   return this.$store.getters.getTarget
+    // },
   },
   watch: {
     len() {
-      console.log('変更されました')
+      console.log('watch')
       this.testTotal = this.$store.getters.getTotalLength
+      this.value = parseInt((this.testTotal / this.target) * 100000)
+
+      this.testTotal = parseInt(this.testTotal * 1000)
     },
     targetlen() {
       this.target = this.$store.getters.getTarget
@@ -77,13 +82,14 @@ export default {
     }
     this.interval = setInterval(() => {
       if (this.value === 100) {
+        
         return (this.value = 0)
       }
       this.value += 1
-    }, 20000)
+    }, 30000)
     this.interval = setInterval(() => {
       this.getLocation()
-    }, 20000)
+    }, 10000)
   },
   methods: {
     getLocation() {
@@ -144,12 +150,12 @@ export default {
     },
     resetDistance() {
       localStorage.clear()
+      this.$store.commit('clear')
       this.testTotal = 0
     },
     randamTarget() {
-      const len = (Math.floor(Math.random() * (10 + 1 - 1)) + 1) * 100
-      console.log(len)
-      this.$store.commit('setTarget', len)
+      const le = (Math.floor(Math.random() * (10 + 1 - 1)) + 1) * 100
+      this.$store.commit('setTarget', le)
     },
   },
 }

@@ -14,21 +14,41 @@ use backend_db;
 );
 
 insert into
-   tasks(id,detail,isAvaliable)
+   tasks(id,detail,isAvailable)
 values
    (0,"運動させる",1);
 
 insert into
-   tasks(id,detail,isAvaliable)
+   tasks(id,detail,isAvailable)
 values
    (1,"音楽を流す",1);
 
 insert into
-   tasks(id,detail,isAvaliable)
+   tasks(id,detail,isAvailable)
 values
    (2,"報酬を与える",0);
 
 insert into
-   tasks(id,detail,isAvaliable)
+   tasks(id,detail,isAvailable)
 values
    (3,"瞑想させる",0);
+
+insert into
+   counts(id,count)
+values
+   (0,0)
+
+insert into
+   counts(id,count)
+values
+   (1,0)
+
+insert into
+   counts(id,count)
+values
+   (2,0)
+
+insert into
+   counts(id,count)
+values
+   (3,0)

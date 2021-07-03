@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-row>
       <v-col cols="12" md="7">
-        <v-card max-width="2000px" class="ma-12">
+        <v-card max-width="2000px" class="ma-12 rounded-card">
           <v-row justify="center">
             <v-card-title>{{ length }}m走る</v-card-title>
           </v-row>
@@ -28,6 +28,11 @@
             </v-col>
           </v-row>
         </v-progress-circular>
+      </v-col>
+      <v-col cols="12" style="position: relative">
+        <v-btn fab class="button-map">
+          <v-icon>mdi-map-marker</v-icon>
+        </v-btn>
       </v-col>
     </v-row>
   </div>
@@ -78,13 +83,20 @@ export default {
     },
     success(position) {
       // 現在の緯度経度を代入
+
       this.myLatLng1.lat = position.coords.latitude
       this.myLatLng1.lng = position.coords.longitude
 
       position = { lat: this.myLatLng1.lat, lng: this.myLatLng1.lng }
 
-      // 一つ前の緯度経度を代入
-      const pastLatLng = this.$store.getters.getPastLatLng
+      let pastLatLng
+      if (this.$store.getters.getTotalLength === 0) {
+        // 初めに取得する値は0にするためその場の位置を代入
+        pastLatLng = { lat: this.myLatLng1.lat, lng: this.myLatLng1.log }
+      } else {
+        // 一つ前の緯度経度を代入
+        pastLatLng = this.$store.getters.getPastLatLng
+      }
 
       // 距離
       const totalLength =
@@ -137,5 +149,12 @@ export default {
 }
 .targetRun {
   margin: 30px;
+}
+.rounded-card {
+  border-radius: 50px;
+}
+.button-map {
+  position: absolute;
+  right: 20px;
 }
 </style>

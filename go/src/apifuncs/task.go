@@ -1,7 +1,6 @@
 package apifuncs
 
 import (
-	"log"
 	"math/rand"
 	"net/http"
 
@@ -45,8 +44,6 @@ func getThreeTasksRandomly(tasks []dbctl.Task) []dbctl.Task {
 			three = append(three, tasks[n])
 		}
 	}
-	log.Println(three)
-
 	return three
 }
 
@@ -57,5 +54,9 @@ func PostTaskHandler(c *gin.Context) {
 		return
 	}
 	// todo: データベースの関数呼び出し
-
+	if err := dbctl.InsertCount(req.TaskID); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+		return
+	}
+	c.Status(http.StatusOK)
 }

@@ -57,7 +57,7 @@ func InsertCount(TaskID int) error {
 
 func InsertTask(TaskName string, TaskAvailable bool) error {
 	var tmp = 0
-	if TaskAvailable == true {
+	if TaskAvailable {
 		tmp = 1
 	} else {
 		tmp = 0

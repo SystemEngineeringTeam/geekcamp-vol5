@@ -1,29 +1,53 @@
 package apifuncs
 
 import (
+	"log"
+	"math/rand"
 	"net/http"
 
+	"github.com/SystemEngineeringTeam/geekcamp-vol5/dbctl"
 	"github.com/gin-gonic/gin"
 )
-
-type JsonTaskGet struct {
-	TaskID      int    `json:"task_id"`
-	Detail      string `json:"detail"`
-	IsAvailable bool   `json:"is_available"`
-}
 
 type JsonTaskPost struct {
 	TaskID int `json:"task_id"`
 }
 
 func TaskGetHandler(c *gin.Context) {
-	var res []JsonTaskGet
 
 	// TODO: データベースの関数呼び出し
+	json, err := dbctl.Gettasks()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "database error"})
+		return
+	}
 
-	res = append(res, JsonTaskGet{9999, "hoge", true})
+	res := getThreeTasksRandomly(json)
 
 	c.JSON(http.StatusOK, res)
+}
+
+func getThreeTasksRandomly(tasks []dbctl.Task) []dbctl.Task {
+	three := make([]dbctl.Task, 0)
+	numbers := make([]int, 0)
+	isUnique := true
+
+	for i := 0; len(three) != 3; i++ {
+		isUnique = true
+		n := rand.Intn(len(tasks))
+		for _, v := range numbers {
+			if n == v {
+				isUnique = false
+			}
+		}
+		if isUnique {
+			numbers = append(numbers, n)
+			three = append(three, tasks[n])
+		}
+	}
+	log.Println(three)
+
+	return three
 }
 
 func PostTaskHandler(c *gin.Context) {

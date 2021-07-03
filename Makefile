@@ -2,15 +2,17 @@ COMPOSE=docker-compose
 DOCKER=docker
 BACK=geekcamp_go
 DB=geekcamp_mysql
+BACK_SERVICE = backend
+DB_SERVICE = mysql
 
 run/build:
 	$(COMPOSE) up -d --build
 
 run/backend:
-	$(COMPOSE) up -d --build $(BACK)
+	$(COMPOSE) up -d --build $(BACK_SERVICE)
 
 run/database:
-	$(COMPOSE) up -d --build $(DB)
+	$(COMPOSE) up -d --build $(DB_SERVICE)
 
 run:
 	$(COMPOSE) up -d
@@ -29,3 +31,6 @@ down/v:
 
 logs:
 	$(COMPOSE) logs
+
+ps:
+	$(COMPOSE) ps

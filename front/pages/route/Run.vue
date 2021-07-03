@@ -1,0 +1,117 @@
+<template>
+  <div class="text-center">
+    <v-row>
+      <v-col cols="12">
+        <v-card>
+          <v-card-title class="text-center">300m</v-card-title>
+        </v-card>
+      </v-col>
+      <v-col cols="12">
+        <v-progress-circular
+          :rotate="270"
+          :size="300"
+          :width="30"
+          :value="value"
+          color="teal"
+          button
+        >
+          <v-row>
+            <v-col cols="12">
+              <div class="distance">{{ value }}</div>
+              <v-btn @click="getLocation()">距離を測る</v-btn>
+            </v-col>
+            <v-col cols="12">
+              <v-btn @click="resetDistance()">リセットする</v-btn>
+            </v-col>
+          </v-row>
+        </v-progress-circular>
+      </v-col>
+    </v-row>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      interval: {},
+      value: 0,
+      latitude: 35,
+      longitude: 138,
+      myLatLng1: { lat: 35.397, lng: 138.644 },
+      length: 0,
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.interval)
+  },
+  mounted() {
+    this.interval = setInterval(() => {
+      if (this.value === 100) {
+        return (this.value = 0)
+      }
+      this.value += 1
+    }, 60000)
+  },
+  methods: {
+    getLocation() {
+      navigator.geolocation.getCurrentPosition(this.success, this.error)
+    },
+    success(position) {
+      // 現在の緯度経度を代入
+      this.myLatLng1.lat = position.coords.latitude
+      this.myLatLng1.lng = position.coords.longitude
+
+      position = { lat: this.myLatLng1.lat, lng: this.myLatLng1.lng }
+
+      // 一つ前の緯度経度を代入
+      const pastLatLng = this.$store.getters.getPastLatLng
+
+      // 距離
+      const TotalLength =
+        this.$store.getters.getTotalLength +
+        this.distanced(
+          this.myLatLng1.lat,
+          this.myLatLng1.lng,
+          pastLatLng.lat,
+          pastLatLng.lng
+        )
+      // 合計距離をローカルストレージに保存
+      this.$store.commit('saveTotalLength', TotalLength)
+      // 前回のデータが上書きされるのでここまでに距離の計算をする
+
+      // 現在の緯度経度の保存
+      this.$store.commit('savePosition', position)
+    },
+    error(err) {
+      console.log(err)
+    },
+    distanced(lat1, lng1, lat2, lng2) {
+      lat1 *= Math.PI / 180
+      lng1 *= Math.PI / 180
+      lat2 *= Math.PI / 180
+      lng2 *= Math.PI / 180
+
+      return (
+        6371 *
+        Math.acos(
+          Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) +
+            Math.sin(lat1) * Math.sin(lat2)
+        )
+      )
+    },
+    resetDistance() {
+      localStorage.clear()
+    },
+  },
+}
+</script>
+
+<style scoped>
+.v-progress-circular {
+  margin: 1rem;
+}
+.distance {
+  font-size: 80px;
+}
+</style>

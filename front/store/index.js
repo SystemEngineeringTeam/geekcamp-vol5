@@ -3,7 +3,7 @@ export const state = () => ({
   count: 0,
   pastLatLng: { lat: 35.0036648, lng: 136.958297 },
   totalLength: 0,
-  MidTimeTmp:0
+  MidTimeTmp:0,
   targetLength: 0,
 })
 

@@ -36,19 +36,19 @@ values
 insert into
    counts(count)
 values
-   (0)
+   (0);
 
 insert into
    counts(count)
 values
-   (0)
+   (0);
 
 insert into
    counts(count)
 values
-   (0)
+   (0);
 
 insert into
    counts(count)
 values
-   (0)
+   (0);

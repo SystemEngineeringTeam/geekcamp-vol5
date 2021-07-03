@@ -5,6 +5,7 @@ export const state = () => ({
   totalLength: 0,
   MidTimeTmp:0,
   targetLength: 0,
+  target: 0,
 })
 
 export const getters = {

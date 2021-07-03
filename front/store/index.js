@@ -3,7 +3,7 @@ export const state = () => ({
   count: 0,
   pastLatLng: { lat: 35.0036648, lng: 136.958297 },
   totalLength: 0,
-  targetLength: 0,
+  target: 0,
 })
 
 export const getters = {
@@ -16,7 +16,9 @@ export const getters = {
   getTotalLength(state) {
     return state.totalLength
   },
-  getTargetLength() {},
+  getTarget(state) {
+    return state.target
+  },
 }
 
 export const mutations = {
@@ -35,6 +37,9 @@ export const mutations = {
   savePosition(state, positon) {
     state.pastLatLng.lat = positon.lat
     state.pastLatLng.lng = positon.lng
+  },
+  setTarget(state, target) {
+    state.target = target
   },
 }
 

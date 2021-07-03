@@ -4,7 +4,7 @@
       <v-col cols="12" md="7">
         <v-card max-width="2000px" class="ma-12 rounded-card">
           <v-row justify="center">
-            <v-card-title>{{ length }}m走る</v-card-title>
+            <v-card-title>{{ target }}m走る</v-card-title>
           </v-row>
         </v-card>
       </v-col>
@@ -47,7 +47,7 @@ export default {
       latitude: 35,
       longitude: 138,
       myLatLng1: { lat: 35.397, lng: 138.644 },
-      length: 0,
+      target: this.$store.getters.getTarget,
       testTotal: this.$store.getters.getTotalLength,
     }
   },
@@ -55,18 +55,26 @@ export default {
     len() {
       return this.$store.getters.getTotalLength
     },
+    targetLen() {
+      return this.$store.getters.getTarget
+    },
   },
   watch: {
     len() {
       console.log('変更されました')
       this.testTotal = this.$store.getters.getTotalLength
     },
+    targetlen() {
+      this.target = this.$store.getters.getTarget
+    },
   },
   beforeDestroy() {
     clearInterval(this.interval)
   },
-
   mounted() {
+    if (this.target === 0) {
+      this.randamTarget()
+    }
     this.interval = setInterval(() => {
       if (this.value === 100) {
         return (this.value = 0)
@@ -83,23 +91,22 @@ export default {
     },
     success(position) {
       // 現在の緯度経度を代入
+      // console.log(this.$store.getters.getPastLatLng)
 
       this.myLatLng1.lat = position.coords.latitude
       this.myLatLng1.lng = position.coords.longitude
 
       position = { lat: this.myLatLng1.lat, lng: this.myLatLng1.lng }
 
-      let pastLatLng
-      if (this.$store.getters.getTotalLength === 0) {
-        console.log('現在地')
-        // 初めに取得する値は0にするためその場の位置を代入
-        pastLatLng = { lat: this.myLatLng1.lat, lng: this.myLatLng1.log }
-      } else {
-        console.log('だめです' + this.$store.getters.getTotalLength)
-
-        // 一つ前の緯度経度を代入
-        pastLatLng = this.$store.getters.getPastLatLng
-      }
+      const pastLatLng = this.$store.getters.getPastLatLng
+      console.log(pastLatLng)
+      // if (this.$store.getters.getTotalLength === 0) {
+      //   // 初めに取得する値は0にするためその場の位置を代入
+      //   pastLatLng = { lat: this.myLatLng1.lat, lng: this.myLatLng1.log }
+      // } else {
+      //   // 一つ前の緯度経度を代入
+      //   pastLatLng = this.$store.getters.getPastLatLng
+      // }
 
       // 距離
       const totalLength =
@@ -138,6 +145,11 @@ export default {
     resetDistance() {
       localStorage.clear()
       this.testTotal = 0
+    },
+    randamTarget() {
+      const len = (Math.floor(Math.random() * (10 + 1 - 1)) + 1) * 100
+      console.log(len)
+      this.$store.commit('setTarget', len)
     },
   },
 }

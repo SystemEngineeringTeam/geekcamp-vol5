@@ -54,3 +54,19 @@ func InsertCount(TaskID int) error {
 	}
 	return nil
 }
+func InsertTask(TaskName string, TaskAvailable bool) error {
+
+	var tmp = 0
+	if TaskAvailable == true {
+		tmp = 1
+	} else {
+		tmp = 0
+	}
+	// タスクを挿入するSQL
+	_, err := db.Exec("insert into tasks(detail,isAvailable) values(?, ?);", TaskName, tmp)
+	if err != nil {
+		fmt.Println("insert err")
+		return err
+	}
+	return nil
+}

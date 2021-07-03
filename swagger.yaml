@@ -1,0 +1,57 @@
+swagger: "2.0"
+info:
+  version: "1.1"
+  title: "入退室管理 "
+  description: "部室の入退室管理用API"
+tags:
+  - name: "task"
+
+paths:
+  /task:
+    get:
+      tags:
+        - "task"
+      summary: "タスクをランダムで返す"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "response"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                taskID:
+                  type: "integer"
+                detail:
+                  type: "string"
+                isAvaliable:
+                  type: "boolean"
+
+    post:
+      tags:
+        - "task"
+      summary: "達成したタスクのログを取る"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          description: "response"
+          schema:
+            type: "object"
+            properties:
+              taskID:
+                type: "integer"
+
+      responses:
+        200:
+          description: OK

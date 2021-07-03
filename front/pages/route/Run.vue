@@ -1,15 +1,17 @@
 <template>
   <div class="text-center">
     <v-row>
-      <v-col cols="12">
-        <v-card>
-          <v-card-title class="text-center">300m</v-card-title>
+      <v-col cols="12" md="7">
+        <v-card max-width="2000px" class="ma-12">
+          <v-row justify="center">
+            <v-card-title>{{ length }}m走る</v-card-title>
+          </v-row>
         </v-card>
       </v-col>
       <v-col cols="12">
         <v-progress-circular
           :rotate="270"
-          :size="300"
+          :size="320"
           :width="30"
           :value="value"
           color="teal"
@@ -22,6 +24,7 @@
             </v-col>
             <v-col cols="12">
               <v-btn @click="resetDistance()">リセットする</v-btn>
+              {{ testTotal }}km
             </v-col>
           </v-row>
         </v-progress-circular>
@@ -40,18 +43,34 @@ export default {
       longitude: 138,
       myLatLng1: { lat: 35.397, lng: 138.644 },
       length: 0,
+      testTotal: this.$store.getters.getTotalLength,
     }
+  },
+  computed: {
+    len() {
+      return this.$store.getters.getTotalLength
+    },
+  },
+  watch: {
+    len() {
+      console.log('変更されました')
+      this.testTotal = this.$store.getters.getTotalLength
+    },
   },
   beforeDestroy() {
     clearInterval(this.interval)
   },
+
   mounted() {
     this.interval = setInterval(() => {
       if (this.value === 100) {
         return (this.value = 0)
       }
       this.value += 1
-    }, 60000)
+    }, 20000)
+    this.interval = setInterval(() => {
+      this.getLocation()
+    }, 20000)
   },
   methods: {
     getLocation() {
@@ -68,7 +87,7 @@ export default {
       const pastLatLng = this.$store.getters.getPastLatLng
 
       // 距離
-      const TotalLength =
+      const totalLength =
         this.$store.getters.getTotalLength +
         this.distanced(
           this.myLatLng1.lat,
@@ -76,8 +95,9 @@ export default {
           pastLatLng.lat,
           pastLatLng.lng
         )
+      console.log(totalLength)
       // 合計距離をローカルストレージに保存
-      this.$store.commit('saveTotalLength', TotalLength)
+      this.$store.commit('saveTotalLength', totalLength)
       // 前回のデータが上書きされるのでここまでに距離の計算をする
 
       // 現在の緯度経度の保存
@@ -102,6 +122,7 @@ export default {
     },
     resetDistance() {
       localStorage.clear()
+      this.testTotal = 0
     },
   },
 }
@@ -112,6 +133,9 @@ export default {
   margin: 1rem;
 }
 .distance {
-  font-size: 80px;
+  font-size: 40px;
+}
+.targetRun {
+  margin: 30px;
 }
 </style>

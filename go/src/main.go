@@ -7,8 +7,9 @@ import (
 
 func main() {
 	r := gin.Default()
+	gin.SetMode(gin.DebugMode)
 
 	r.GET("/task", apifuncs.TaskGetHandler)
 	r.POST("/task", apifuncs.PostTaskHandler)
-	r.Run()
+	r.Run(":80")
 }

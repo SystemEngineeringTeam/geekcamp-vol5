@@ -1,8 +1,18 @@
 <template>
   <div>
-    <h1>Google Map</h1>
-    <div ref="map" style="height: 500px; width: 800px"></div>
-    <v-btn @click="getLocation()">現在の位置</v-btn>
+    <v-row>
+      <v-col cols="12">
+        <div ref="map" style="height: 500px; width: 350px"></div>
+      </v-col>
+      <v-col>
+        <v-btn @click="getLocation()">現在の位置</v-btn>
+      </v-col>
+      <v-col style="position: relative">
+        <v-btn fab class="run-icon" nuxt to="Run">
+          <v-icon>mdi-run</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -95,5 +105,9 @@ export default {
 .map {
   width: 100%;
   height: 50%;
+}
+.run-icon {
+  position: absolute;
+  right: 30px;
 }
 </style>

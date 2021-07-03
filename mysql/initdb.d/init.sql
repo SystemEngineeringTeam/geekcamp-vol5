@@ -16,22 +16,22 @@ use backend_db;
 insert into
    tasks(detail,isAvailable)
 values
-   ("運動させる",1);
+   ("運動させる",1);
 
 insert into
    tasks(detail,isAvailable)
 values
-   ("音楽を流す",1);
+   ("音楽を流す",1);
 
 insert into
    tasks(detail,isAvailable)
 values
-   ("報酬を与える",0);
+   ("報酬を与える",0);
 
 insert into
    tasks(detail,isAvailable)
 values
-   ("瞑想させる",0);
+   ("瞑想させる",0);
 
 insert into
    counts(count)

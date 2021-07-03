@@ -15,7 +15,7 @@
         <a class="neumorphic-btn mt-12 ml-0">ドーパミンを出す</a>
       </NuxtLink>
     </v-col>
-      <!-- <v-btn nuxt to="route/Select">select</v-btn>
+    <!-- <v-btn nuxt to="route/Select">select</v-btn>
     </v-col> -->
   </v-row>
 </template>
@@ -23,7 +23,18 @@
 <script>
 export default {
   setup() {},
-  methods: {},
+
+  mounted() {
+    navigator.geolocation.getCurrentPosition(this.success, this.error)
+  },
+  methods: {
+    success(pos) {
+      console.log(pos)
+    },
+    error(err) {
+      console.log(err)
+    },
+  },
 }
 </script>
 <style scoped>

@@ -46,6 +46,7 @@ func Gettasks() ([]Task, error) {
 	}
 	return Tasks, nil
 }
+
 func InsertCount(TaskID int) error {
 	_, err := db.Exec("UPDATE counts set count = count+1 where id = ?", TaskID)
 	if err != nil {
@@ -57,7 +58,7 @@ func InsertCount(TaskID int) error {
 
 func InsertTask(TaskName string, TaskAvailable bool) error {
 	var tmp = 0
-	if TaskAvailable == true {
+	if TaskAvailable {
 		tmp = 1
 	} else {
 		tmp = 0

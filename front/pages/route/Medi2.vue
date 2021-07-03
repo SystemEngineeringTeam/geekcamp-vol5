@@ -1,6 +1,6 @@
 <template>
   <body>
-    <center class="all">
+    <center class="all pt-10 mt-10">
       <p>ガイドに従い</p>
       <p>瞑想を行ってください...</p>
       <v-card class="mx-auto" max-width="600">
@@ -17,7 +17,7 @@
             track-color="grey"
             always-dirty
             min="0"
-            max="218"
+            :max="allseconds"
           >
           </v-slider>
         </v-card-text>
@@ -25,28 +25,47 @@
     </center>
   </body>
 </template>
-  
+
 <script>
 export default {
   data: () => ({
     bpm: 0,
+    maxbpm: 0,
     alltime: 0,
+    allseconds: 0,
   }),
 
   computed: {
     color() {
-      if (this.bpm < 100) return 'indigo'
-      if (this.bpm < 125) return 'teal'
-      if (this.bpm < 140) return 'green'
-      if (this.bpm < 175) return 'orange'
+      if (this.bpm < this.allseconds / 4) return 'indigo'
+      if (this.bpm < (this.allseconds / 4) * 2) return 'teal'
+      if (this.bpm < (this.allseconds / 4) * 2.5) return 'green'
+      if (this.bpm < (this.allseconds / 4) * 3) return 'orange'
       return 'red'
-    },
-    animationDuration() {
-      return `${60 / this.bpm}s`
     },
   },
   created() {
+    setInterval(this.coutUp, 10)
+
     this.alltime = this.$store.state.MidTimeTmp
+    switch (this.alltime) {
+      case 2:
+      case 4:
+      case 6:
+      case 8:
+        this.allseconds = this.alltime * 60
+        break
+      default:
+        break
+    }
+  },
+  methods: {
+    coutUp() {
+      this.bpm += 1
+      if (this.bpm == this.allseconds) {
+        this.$router.push('/route/Medi3')
+      }
+    },
   },
 }
 </script>

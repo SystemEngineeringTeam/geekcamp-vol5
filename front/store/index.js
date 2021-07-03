@@ -25,8 +25,10 @@ export const mutations = {
   changText(state, text) {
     state.text = text
   },
+  // ローカルストレージに保存
   saveTotalLength(state, length) {
-    state.getTotalLength = length
+    console.log(length)
+    state.totalLength = length
   },
   savePosition(state, positon) {
     state.pastLatLng.lat = positon.lat

@@ -16,7 +16,7 @@ var db *sql.DB
 func init() {
 	var err error
 
-	db, err = sql.Open("mysql", "user:password@tcp(geekcamp_mysql:3306)/backend_db")
+	db, err = sql.Open("mysql", "user:password@tcp(geekcamp_mysql:33060)/backend_db")
 
 	if err != nil {
 		pc, file, line, _ := runtime.Caller(0)

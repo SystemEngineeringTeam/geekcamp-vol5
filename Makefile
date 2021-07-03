@@ -1,7 +1,7 @@
 COMPOSE=docker-compose
 DOCKER=docker
-BACK=geekcamp-vol5-backend_1
-DB=geekcamp-vol5-mysql_1
+BACK=geekcamp_go
+DB=geekcamp_mysql
 
 run/build:
 	$(COMPOSE) up -d --build

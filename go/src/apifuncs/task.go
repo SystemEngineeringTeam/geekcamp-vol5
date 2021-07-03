@@ -8,7 +8,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type JsonTaskPost struct {
+var JsonParsingError = gin.H{"error": "Cannot parse JSON"}
+var DatabaseError = gin.H{"error": "database error"}
+
+type IdOnlyStruct struct {
 	TaskID int `json:"task_id"`
 }
 
@@ -17,7 +20,7 @@ func TaskGetHandler(c *gin.Context) {
 	// TODO: データベースの関数呼び出し
 	json, err := dbctl.Gettasks()
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "database error"})
+		c.JSON(http.StatusInternalServerError, DatabaseError)
 		return
 	}
 
@@ -48,14 +51,14 @@ func getThreeTasksRandomly(tasks []dbctl.Task) []dbctl.Task {
 }
 
 func PostTaskHandler(c *gin.Context) {
-	var req JsonTaskPost
+	var req IdOnlyStruct
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Cannot parse JSON"})
+		c.JSON(http.StatusBadRequest, JsonParsingError)
 		return
 	}
 	// todo: データベースの関数呼び出し
 	if err := dbctl.InsertCount(req.TaskID); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+		c.JSON(http.StatusInternalServerError, DatabaseError)
 		return
 	}
 	c.Status(http.StatusOK)

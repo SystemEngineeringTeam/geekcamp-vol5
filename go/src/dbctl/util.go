@@ -13,9 +13,8 @@ const errFormat = "%v\nfunction:%v file:%v line:%v\n"
 
 var db *sql.DB
 
-const host = "geekcamp_mysql:3306"
-
-// const host = "localhost:33060"
+// const host = "geekcamp_mysql:3306"
+const host = "localhost:33060"
 
 func init() {
 	var err error

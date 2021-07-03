@@ -54,3 +54,12 @@ func InsertCount(TaskID int) error {
 	}
 	return nil
 }
+func IsAvailableReverse(TaskID int) error {
+	_, err := db.Exec("UPDATE tasks SET isAvailable = if(isAvailable = 1, 0, 1) where id = ?", TaskID)
+	if err != nil {
+		fmt.Println("count err")
+		return err
+	}
+	return nil
+
+}

@@ -26,19 +26,23 @@ func Gettasks() ([]Task, error) {
 	}
 	defer rows.Close()
 	var Tasks []Task
-	/*
 
-		for rows.Next() {
-			// SQLの結果一行分を受け取る変数を宣言
-			var id int
-			var Detail string
-			var IsAvailable int
-			// 受け取る
-			rows.Scan(&id, &Detail, &IsAvailable)
-			// 受け取ったものをTasksに追加する．
-			Tasks = append(Tasks, Task{ID: id, Name: name, Description: description, SubmitTime: submitTime, Label: label})
+	for rows.Next() {
+
+		var id int
+		var Detail string
+		var isAvailable int
+
+		tmp := false
+
+		rows.Scan(&id, &Detail, &isAvailable)
+		if isAvailable == 0 {
+			tmp = false
+
+		} else if isAvailable == 1 {
+			tmp = true
 		}
-	*/
-
+		Tasks = append(Tasks, Task{TaskID: id, Detail: Detail, IsAvailable: tmp})
+	}
 	return Tasks, nil
 }

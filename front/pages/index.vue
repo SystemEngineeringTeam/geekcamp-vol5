@@ -108,7 +108,7 @@ export default {
 h1 {
   font-family: 'Roboto', sans-serif;
   text-align: center;
-  color: #e8e8e8;
+  color: #3c3c3c;
   text-shadow: 4px 4px 3px #bebebe, -3px -3px 5px #ffffff;
   font-size: 40px;
   letter-spacing: 0.2em;
@@ -118,7 +118,7 @@ h1 {
 p {
   font-family: 'Roboto', sans-serif;
   text-align: center;
-  color: #e8e8e8;
+  color: #101010;
   text-shadow: 4px 4px 3px #bebebe, -3px -3px 5px #ffffff;
   font-size: 35px;
   letter-spacing: 0.2em;

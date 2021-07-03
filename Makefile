@@ -25,4 +25,7 @@ down:
 	$(COMPOSE) down
 
 down/v:
-	$(COMPOSE) down -vol5
+	$(COMPOSE) down -v
+
+logs:
+	$(COMPOSE) logs

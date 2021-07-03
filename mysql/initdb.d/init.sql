@@ -3,8 +3,8 @@ use backend_db;
 -- TODO: API設計
  CREATE TABLE tasks (
     id SERIAL PRIMARY KEY,
-    detaill VARCHAR(128) NOT NULL COMMENT 'Task Content',
-    isAvaliable BOOLEAN NOT NULL
+    detail VARCHAR(128) NOT NULL COMMENT 'Task Content',
+    isAvailable BOOLEAN NOT NULL
  );
 
  CREATE TABLE counts (

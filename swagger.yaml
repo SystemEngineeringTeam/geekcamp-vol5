@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
   version: "1.1"
-  title: "入退室管理 "
-  description: "部室の入退室管理用API"
+  title: "GeekCamp"
+  description: "geekcamp用API"
 tags:
   - name: "task"
 
@@ -25,11 +25,11 @@ paths:
             items:
               type: "object"
               properties:
-                taskID:
+                task_id:
                   type: "integer"
                 detail:
                   type: "string"
-                isAvaliable:
+                is_available:
                   type: "boolean"
 
     post:
@@ -49,7 +49,7 @@ paths:
           schema:
             type: "object"
             properties:
-              taskID:
+              task_id:
                 type: "integer"
 
       responses:

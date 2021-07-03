@@ -54,6 +54,23 @@ func InsertCount(TaskID int) error {
 	}
 	return nil
 }
+
+func InsertTask(TaskName string, TaskAvailable bool) error {
+	var tmp = 0
+	if TaskAvailable == true {
+		tmp = 1
+	} else {
+		tmp = 0
+	}
+	// タスクを挿入するSQL
+	_, err := db.Exec("insert into tasks(detail,isAvailable) values(?, ?);", TaskName, tmp)
+	if err != nil {
+		fmt.Println("insert err")
+		return err
+	}
+	return nil
+}
+
 func IsAvailableReverse(TaskID int) error {
 	_, err := db.Exec("UPDATE tasks SET isAvailable = if(isAvailable = 1, 0, 1) where id = ?", TaskID)
 	if err != nil {
@@ -61,5 +78,4 @@ func IsAvailableReverse(TaskID int) error {
 		return err
 	}
 	return nil
-
 }

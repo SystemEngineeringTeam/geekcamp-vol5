@@ -3,6 +3,7 @@ export const state = () => ({
   count: 0,
   pastLatLng: { lat: 35.0036648, lng: 136.958297 },
   totalLength: 0,
+  MidTimeTmp:0
 })
 
 export const getters = {
@@ -34,6 +35,11 @@ export const mutations = {
     state.pastLatLng.lat = positon.lat
     state.pastLatLng.lng = positon.lng
   },
+  saveMidTimeTmp(state, time) {
+     console.log(time)
+    state.MidTimeTmp = time
+
+  }
 }
 
 export const actions = {}

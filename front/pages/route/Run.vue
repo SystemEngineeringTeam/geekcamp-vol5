@@ -34,6 +34,9 @@
           <v-icon>mdi-map-marker</v-icon>
         </v-btn>
       </v-col>
+      <v-col>
+        <Celebration v-if="true"></Celebration>
+      </v-col>
     </v-row>
   </div>
 </template>
@@ -80,14 +83,15 @@ export default {
     if (this.target === 0) {
       this.randamTarget()
     }
+    // this.interval = setInterval(() => {
+    //   if (this.value === 100) {
+    //     return (this.value = 0)
+    //   }
+    //   this.value += 1
+    // }, 30000)
     this.interval = setInterval(() => {
-      if (this.value === 100) {
-        
-        return (this.value = 0)
-      }
-      this.value += 1
-    }, 30000)
-    this.interval = setInterval(() => {
+      // if (value > 99) {
+      // }
       this.getLocation()
     }, 10000)
   },

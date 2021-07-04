@@ -30,9 +30,8 @@
         <v-col cols="12" class="select">
           <v-btn
             block
-            color="green"
             height="120px"
-            class="black--text text-h4"
+            class="black--text text-h4 test"
             rounded
             nuxt
             to="/route/Meditation"
@@ -57,5 +56,12 @@ export default {
 }
 .select {
   margin: 30px;
+}
+.test {
+  margin: 50px;
+  padding: 10px;
+  width: 50px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px #bbbbbb, -5px -5px 10px #ffffff;
 }
 </style>

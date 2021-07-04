@@ -3,11 +3,11 @@
     <v-container justify="center" style="positon: relative">
       <v-row justify="center" style="positon: relative" align-content="center">
         <p class="mt-5">Please Select</p>
-          <v-col v-for="text in texts" :key="text" cols="12" md="12" class="mt-10">
-            <NuxtLink to="/route/Meditation">
+          <v-col v-for=" task in tasks" :key="task.text" cols="12" md="12" class="mt-10">
+            <NuxtLink :to="task.url">
             <button
-              :style="text.color"
-              >{{ text.text }}</button
+              :style="task.color"
+              >{{ task.text }}</button
             >
             </NuxtLink>
           </v-col>
@@ -20,18 +20,21 @@
 export default {
   data(){
     return {
-      texts: [
+      tasks: [
         {
           text: '走る',
-          color: 'color:rgba(247, 70, 70, 0.8)'
+          color: 'color:rgba(247, 70, 70, 0.8)',
+          url: '/route/Run'
         },
         {
           text: '音楽を聞く',
-          color: ''
+          color: '',
+          url: '/route/Music'
         },
         {
           text:'瞑想する',
-          color: 'color:rgba(25, 197, 10, 0.918)'
+          color: 'color:rgba(25, 197, 10, 0.918)',
+          url:'/route/Meditation'
         }
       ]
     }

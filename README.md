@@ -11,35 +11,51 @@ Built with Golang,Docker,Nuxt.js,MySQL
 
 
 ## How to run this site
-$ cd frontend
-$ yarn install
+
+`$ cd frontend`
+
+`$ yarn install`
 
 ### serve with hot reload at localhost:3000
-$ yarn dev
+
+`$ yarn dev`
 
 ### build for production and launch server
-$ yarn build
-$ yarn start
+
+`$ yarn build`
+
+`$ yarn start`
 
 ### generate static project
-$ yarn generate
+
+`$ yarn generate`
 
 ## How to use Docker-Compose and Makefile
 
+```
 $ make run/build
 	$(COMPOSE) up -d --build
+```
     
+```
 $ make run
 	$(COMPOSE) up -d
+```
 
+```
 $ make sh/database
 	$(DOCKER) exec -it $(DB) bash
+```
 
+```
 $ make down
 	$(COMPOSE) down
+```
 
+```
 $ make down/v
 	$(COMPOSE) down -v
+```
 
 
 ###### tags: `Documentation`

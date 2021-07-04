@@ -57,5 +57,8 @@ $ make down/v
 	$(COMPOSE) down -v
 ```
 
+License
+This repository is provided under the MIT License.
+
 
 ###### tags: `Documentation`

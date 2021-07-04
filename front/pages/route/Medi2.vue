@@ -19,6 +19,12 @@
             min="0"
             :max="allseconds"
           >
+            <audio
+              controls
+              autoplay
+              controlslist="nodownload"
+              src="@/assets/healing3.mp3"
+            ></audio>
           </v-slider>
         </v-card-text>
       </v-card>
@@ -27,6 +33,7 @@
 </template>
 
 <script>
+import sound from '~/assets/healing1.mp3'
 export default {
   data: () => ({
     bpm: 0,
@@ -45,7 +52,7 @@ export default {
     },
   },
   created() {
-    setInterval(this.coutUp, 10)
+    setInterval(this.coutUp, 1000)
 
     this.alltime = this.$store.state.MidTimeTmp
     switch (this.alltime) {
@@ -58,6 +65,8 @@ export default {
       default:
         break
     }
+    const audio = new Audio(sound)
+    audio.play()
   },
   methods: {
     coutUp() {

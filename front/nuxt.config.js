@@ -26,6 +26,7 @@ export default {
   plugins: [
     { src: '~/plugins/vue2-google-maps.js' },
     { src: '~/plugins/persistedstate.js', ssr: false },
+    '~/plugins/components.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

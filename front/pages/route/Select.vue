@@ -98,8 +98,4 @@ button:active {
               inset 2px 2px 2px rgba(255, 255, 255, .075),
               inset 2px 2px 4px rgba(0, 0, 0, .15);
 }
-/* .segment {
-  padding: 16px*2 0;
-  text-align: center;
-} */
 </style>

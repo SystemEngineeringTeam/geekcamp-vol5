@@ -2,42 +2,15 @@
   <div>
     <v-container justify="center" style="positon: relative">
       <v-row justify="center" style="positon: relative" align-content="center">
-        <v-col cols="12" md="12" class="mt-30">
-          <!-- class black-textで文字の色を変更している -->
-          <v-btn
-            block
-            color="orange"
-            height="120px"
-            class="black--text text-h4"
-            rounded
-            nuxt
-            to="/route/Run"
-            >走る</v-btn
-          >
-        </v-col>
-        <v-col cols="12" class="select">
-          <v-btn
-            block
-            color="blue"
-            height="120px"
-            class="black--text text-h4"
-            rounded
-            nuxt
-            to="/route/Music"
-            >音楽を聞く</v-btn
-          >
-        </v-col>
-        <v-col cols="12" class="select">
-          <v-btn
-            block
-            height="120px"
-            class="black--text text-h4 test"
-            rounded
-            nuxt
-            to="/route/Meditation"
-            >瞑想する</v-btn
-          >
-        </v-col>
+        <p class="mt-5">Please Select</p>
+          <v-col v-for=" task in tasks" :key="task.text" cols="12" md="12" class="mt-10">
+            <NuxtLink :to="task.url">
+            <button
+              :style="task.color"
+              >{{ task.text }}</button
+            >
+            </NuxtLink>
+          </v-col>
       </v-row>
     </v-container>
   </div>
@@ -45,11 +18,35 @@
 
 <script>
 export default {
+  data(){
+    return {
+      tasks: [
+        {
+          text: '走る',
+          color: 'color:rgba(247, 70, 70, 0.8)',
+          url: '/route/Run'
+        },
+        {
+          text: '音楽を聞く',
+          color: '',
+          url: '/route/Music'
+        },
+        {
+          text:'瞑想する',
+          color: 'color:rgba(25, 197, 10, 0.918)',
+          url:'/route/Meditation'
+        }
+      ]
+    }
+  },
   setup() {},
 }
 </script>
 
 <style scoped>
+* {
+  text-decoration: none;
+}
 .whole {
   position: absolute;
   top: 30px;
@@ -57,11 +54,48 @@ export default {
 .select {
   margin: 30px;
 }
-.test {
-  margin: 50px;
-  padding: 10px;
-  width: 50px;
-  border-radius: 5px;
-  box-shadow: 5px 5px 10px #bbbbbb, -5px -5px 10px #ffffff;
+.a{
+  color: rgba(25, 197, 10, 0.918)
+}
+p {
+  font-family: 'Roboto', sans-serif;
+  text-align: left !important;
+  color: #747474;
+  text-shadow: 4px 4px 3px #bebebe, -3px -3px 5px #ffffff;
+  font-size: 35px;
+
+  text-indent: 0.2em;
+  font-weight: 800;
+}
+button {
+  width: 320px;
+  height: 100px;
+  padding: 1em 2em;
+  background: #efefef;
+  border: none;
+  border-radius: .5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: .2rem;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
+              -6px -6px 10px rgba(255, 255, 255, .5),
+              6px 6px 8px rgba(255, 255, 255, .075),
+              6px 6px 10px rgba(0, 0, 0, .15);
+}
+button:hover {
+  box-shadow: -2px -2px 6px rgba(255, 255, 255, .6),
+              -2px -2px 4px rgba(255, 255, 255, .4),
+              2px 2px 2px rgba(255, 255, 255, .05),
+              2px 2px 4px rgba(0, 0, 0, .1);
+}
+button:active {
+  box-shadow: inset -2px -2px 6px rgba(255, 255, 255, .7),
+              inset -2px -2px 4px rgba(255, 255, 255, .5),
+              inset 2px 2px 2px rgba(255, 255, 255, .075),
+              inset 2px 2px 4px rgba(0, 0, 0, .15);
 }
 </style>

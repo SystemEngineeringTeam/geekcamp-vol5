@@ -30,7 +30,7 @@ export default {
             type: 'video',
             maxResults: '6', // 最大検索数 // (4)
             // キーを設定
-            key: 'AIzaSyDtuov7ul5Wy5rMp37DbbG3Z4uzumM8Qd4'   // (5)
+            key: 'AIzaSyAkBisrX2WfLhU7ugMjSqEDdSqGWQdljD0'   // (5)
         },
         videos:[],
         videoSrc: 'https://www.youtube.com/embed/'

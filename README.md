@@ -10,11 +10,6 @@ Built with Golang,Docker,Nuxt.js,MySQL
 [![GitHub license](https://img.shields.io/github/license/SystemEngineeringTeam/geekcamp-vol5?style=for-the-badge)](https://github.com/SystemEngineeringTeam/geekcamp-vol5/blob/main/LICENSE)
 
 
-## Table of Contents
-
-[TOC]
-
-
 ## How to run this site
 $ cd frontend
 $ yarn install

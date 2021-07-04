@@ -12,9 +12,10 @@
     </v-col>
     <v-col>
       <NuxtLink to="route/Select">
-        <a class="neumorphic-btn mt-12 ml-0">ドーパミンを出す</a>
+        <a class="neumorphic-btn mt-12 ml-0">Get dopamine</a>
       </NuxtLink>
     </v-col>
+    <Celebration v-if="true"></Celebration>
     <!-- <v-btn nuxt to="route/Select">select</v-btn>
     </v-col> -->
   </v-row>
@@ -38,6 +39,9 @@ export default {
 }
 </script>
 <style scoped>
+* {
+  text-decoration: none;
+}
 .up-btn {
   position: relative;
   display: inline-block;
@@ -108,7 +112,7 @@ export default {
 h1 {
   font-family: 'Roboto', sans-serif;
   text-align: center;
-  color: #e8e8e8;
+  color: #747474;
   text-shadow: 4px 4px 3px #bebebe, -3px -3px 5px #ffffff;
   font-size: 40px;
   letter-spacing: 0.2em;
@@ -118,7 +122,7 @@ h1 {
 p {
   font-family: 'Roboto', sans-serif;
   text-align: center;
-  color: #e8e8e8;
+  color: #747474;
   text-shadow: 4px 4px 3px #bebebe, -3px -3px 5px #ffffff;
   font-size: 35px;
   letter-spacing: 0.2em;
@@ -231,12 +235,14 @@ p {
 .neumorphic-btn {
   text-decoration: none;
   align-items: center;
-  font-size: 20px;
-  padding: 0px 95px;
+  text-align: center;
+  font-size: 45px;
+  padding: 0px 40px;
   border-radius: 50%;
+  font-weight: bold;
   width: 350px;
   height: 350px;
-  color: #6d7587;
+  color: #2b2b2b;
   display: flex;
   background-color: var(--back-color);
   /*box-shadow: 3px 4px 6px 1px rgba(0, 0, 0, 0.3),

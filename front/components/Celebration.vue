@@ -8,7 +8,7 @@
         <v-card height="150px">
           <v-row>
             <v-col
-              ><v-card-title>目標達成おめでとう!</v-card-title>
+              ><v-card-title>お疲れ様です!</v-card-title>
               <v-card-actions>
                 <v-btn
                   rounded
@@ -27,8 +27,15 @@
                   rounded
                   class="white--text"
                   color="primary"
-                  @click="overlay = false"
-                  >ツイートする</v-btn
+                  href="http://twitter.com/share?url=https://localhost:8080/&text=瞑想によってドーパミンが放出されました！！！&hashtags=ドーパ民"
+                >
+                  <v-icon
+                    dark
+                    size="42px"
+                    style="text-decoration: none"
+                    color="white"
+                    >mdi-twitter</v-icon
+                  >ツイート</v-btn
                 >
               </v-card-actions></v-col
             >

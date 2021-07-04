@@ -1,19 +1,11 @@
 <template>
   <v-row>
     <v-col cols=12>
-      <div class="black--text text-h4">音楽を聞く</div>
-      <v-text-field
-        v-model="message"
-        style="color:black"
-        label="Message"
-        type="text"
-      >
-        <template v-slot:append-outer>
-          <v-btn @click="searchMovies()">
-            検索
-          </v-btn>
-        </template>
-      </v-text-field>
+      <p class="mt-5">listen to music</p>
+      <input v-model="message" class="neumorphic-input" id="login__input" type="text" />
+      <button @click="searchMovies()">
+        検索
+      </button>
       </v-col>
       <v-col v-for="(video,i) in videos" :key="i" cols="6">
           <!-- <p style="color:black">{{ video.id.videoId }}</p> -->
@@ -38,7 +30,7 @@ export default {
             type: 'video',
             maxResults: '6', // 最大検索数 // (4)
             // キーを設定
-            key: 'AIzaSyDtuov7ul5Wy5rMp37DbbG3Z4uzumM8Qd4'   // (5)
+            key: 'AIzaSyAkBisrX2WfLhU7ugMjSqEDdSqGWQdljD0'   // (5)
         },
         videos:[],
         videoSrc: 'https://www.youtube.com/embed/'
@@ -88,3 +80,68 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.neumorphic-label {
+  color: #868b98;
+  display: block;
+  text-align: start;
+  margin: 25px 10px 5px;
+}
+.neumorphic-input {
+  background-color: var(--back-color);
+  border-radius: 10px;
+  border: 3px solid #f3f4f7;
+  box-shadow: 2px 2px 3px rgba(55, 84, 170, .15),
+              inset 0px 0px 4px rgba(255, 255, 255, 0),
+              inset 7px 7px 15px rgba(55, 84, 170, .15),
+              inset -7px -7px 20px rgba(255, 255, 255, 1),
+              0px 0px 4px rgba(255, 255, 255, .2) !important;
+  padding: 5px 15px;
+  outline: none !important;
+  color: #535D74;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  text-align: left !important;
+  color: #747474;
+  text-shadow: 4px 4px 3px #bebebe, -3px -3px 5px #ffffff;
+  font-size: 35px;
+
+  text-indent: 0.2em;
+  font-weight: 800;
+}
+
+button {
+  padding: 0.1em 0.2em;
+  background: #efefef;
+  border: none;
+  color: #2b2b2b;
+  border-radius: .5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: .2rem;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
+              -6px -6px 10px rgba(255, 255, 255, .5),
+              6px 6px 8px rgba(255, 255, 255, .075),
+              6px 6px 10px rgba(0, 0, 0, .15);
+}
+button:hover {
+  box-shadow: -2px -2px 6px rgba(255, 255, 255, .6),
+              -2px -2px 4px rgba(255, 255, 255, .4),
+              2px 2px 2px rgba(255, 255, 255, .05),
+              2px 2px 4px rgba(0, 0, 0, .1);
+}
+button:active {
+  box-shadow: inset -2px -2px 6px rgba(255, 255, 255, .7),
+              inset -2px -2px 4px rgba(255, 255, 255, .5),
+              inset 2px 2px 2px rgba(255, 255, 255, .075),
+              inset 2px 2px 4px rgba(0, 0, 0, .15);
+}
+
+</style>

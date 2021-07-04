@@ -34,9 +34,7 @@
           <v-icon>mdi-map-marker</v-icon>
         </v-btn>
       </v-col>
-      <v-col>
-        <Celebration v-if="true"></Celebration>
-      </v-col>
+      <v-col> </v-col>
     </v-row>
   </div>
 </template>

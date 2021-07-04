@@ -15,7 +15,6 @@
         <a class="neumorphic-btn mt-12 ml-0">Get dopamine</a>
       </NuxtLink>
     </v-col>
-    <Celebration v-if="true"></Celebration>
     <!-- <v-btn nuxt to="route/Select">select</v-btn>
     </v-col> -->
   </v-row>

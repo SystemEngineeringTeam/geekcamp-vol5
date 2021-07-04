@@ -1,7 +1,7 @@
 <template>
   <div>
     <center class="pt-10 mt-10 text">
-      <p class="toptext">ドーパミンが生成されました！！！</p>
+      <!-- <p class="toptext">ドーパミンが生成されました！！！</p>
       <v-btn
         large
         elevation="1"
@@ -21,7 +21,8 @@
             Twitter
           </a>
         </div>
-      </v-btn>
+      </v-btn> -->
+      <Celebration></Celebration>
     </center>
   </div>
 </template>
@@ -38,7 +39,7 @@ export default {
   methods: {
     coutUp() {
       this.time += 1
-      if (this.time == 15) {
+      if (this.time === 15) {
         this.$router.push('/')
       }
     },

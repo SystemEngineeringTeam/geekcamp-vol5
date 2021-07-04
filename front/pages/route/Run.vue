@@ -4,7 +4,7 @@
       <v-col cols="12" md="7">
         <v-card max-width="2000px" class="ma-12 rounded-card">
           <v-row justify="center">
-            <v-card-title>{{ target }}m走る</v-card-title>
+            <v-card-title>目標:{{ target }}m</v-card-title>
           </v-row>
         </v-card>
       </v-col>
@@ -34,7 +34,9 @@
           <v-icon>mdi-map-marker</v-icon>
         </v-btn>
       </v-col>
-      <v-col> </v-col>
+      <v-col>
+        <Celebration v-if="true"></Celebration>
+      </v-col>
     </v-row>
   </div>
 </template>
@@ -54,7 +56,6 @@ export default {
   },
   computed: {
     len() {
-      console.log('computed')
       return this.$store.getters.getTotalLength
     },
 
@@ -64,7 +65,6 @@ export default {
   },
   watch: {
     len() {
-      console.log('watch')
       this.testTotal = this.$store.getters.getTotalLength
       this.value = parseInt((this.testTotal / this.target) * 100000)
 
@@ -78,6 +78,7 @@ export default {
     clearInterval(this.interval)
   },
   mounted() {
+    this.getLocation()
     if (this.target === 0) {
       this.randamTarget()
     }
@@ -106,7 +107,9 @@ export default {
 
       position = { lat: this.myLatLng1.lat, lng: this.myLatLng1.lng }
 
-      const pastLatLng = this.$store.getters.getPastLatLng
+      // const pastLatLng = this.$store.getters.getPastLatLng
+
+      const pastLatLng = { lat: 34.9899131, lng: 136.9687401 }
       console.log(pastLatLng)
       // if (this.$store.getters.getTotalLength === 0) {
       //   // 初めに取得する値は0にするためその場の位置を代入
@@ -156,7 +159,7 @@ export default {
       this.testTotal = 0
     },
     randamTarget() {
-      const le = (Math.floor(Math.random() * (10 + 1 - 1)) + 1) * 100
+      const le = (Math.floor(Math.random() * (20 + 1 - 5)) + 5) * 100
       this.$store.commit('setTarget', le)
     },
   },

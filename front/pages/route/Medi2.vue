@@ -23,6 +23,9 @@
         </v-card-text>
       </v-card>
     </center>
+    <div>
+      <Celebration v-if="judge"></Celebration>
+    </div>
   </body>
 </template>
 
@@ -33,6 +36,7 @@ export default {
     maxbpm: 0,
     alltime: 0,
     allseconds: 0,
+    judge: false,
   }),
 
   computed: {
@@ -62,8 +66,8 @@ export default {
   methods: {
     coutUp() {
       this.bpm += 1
-      if (this.bpm == this.allseconds) {
-        this.$router.push('/route/Medi3')
+      if (this.bpm === this.allseconds) {
+        this.judge = true
       }
     },
   },
